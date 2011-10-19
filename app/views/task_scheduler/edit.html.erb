@@ -1,0 +1,14 @@
+<% @page_title = 'Edit Task' %>
+
+<h3>Current Time: <%= Time.now.strftime("%Y/%m/%d %H:%M:%S") %></h3>
+
+<%= form_tag( :action => 'update', :id => @scheduled_task) %>
+  <%= render( :partial => 'form') %>
+
+	<p><label for="submit"></label><br/>
+	  <%= submit_tag( 'Save') %></p>
+
+</form>
+
+<%= link_to( 'Show', :action => 'show', :id => @scheduled_task) %> |
+<%= link_to( 'Back', :action => 'list') %>

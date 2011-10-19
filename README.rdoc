@@ -1,0 +1,13 @@
+= TaskScheduler
+
+INSTALL
+
+~ Create your own access control method called
+	def task_scheduler_access_control
+	 	# return false if the Task Scheduler page view is not allowed.
+		@user.is_authorized?
+	end
+
+~ Jump to /task_shcheduler/new to create a task to run in
+
+~ set up a crontab to run this rake as often as your shortest task

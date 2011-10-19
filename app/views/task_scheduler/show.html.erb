@@ -1,0 +1,14 @@
+<% @page_title = "Task Runs" %>
+
+<h2><%= @scheduled_task.rake_method.titleize %> (<%= @scheduled_task.scheduled_task_runs.size %>)</h2>
+
+<table cellpadding='2'>
+<% @scheduled_task.scheduled_task_runs.each { |e| %>
+<tr class='row<%= cycle(1,2) %>'>
+	<td>
+	<h3><%= e.created_at %><h3>
+	<pre><%= e.report.gsub('\n', "\n").sub(/^"?(.*)"?\S+$/, '\1') %></pre>
+	</td>
+</tr>	                                
+<% } %>
+</table>

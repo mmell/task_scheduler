@@ -1,0 +1,39 @@
+<% @page_title = 'Listing Tasks' %>
+
+<h3>Current Time: <%= Time.now.strftime("%Y/%m/%d %H:%M:%S") %></h3>
+
+<table cellpadding='2'>
+<tr>
+	<th></th>
+	<th></th>
+	<th>Task</th>
+	<th>Next Run</th>
+	<th>Last Run</th>
+	<th>State</th>
+</tr>	
+
+<% for scheduled_task in @scheduled_tasks %>
+<tr class='row<%= cycle(1,2) %>'>
+  <td><%= link_to( 'Task Runs', :action => 'show', :id => scheduled_task) %></td>
+  <td><%= link_to( 'Edit', :action => 'edit', :id => scheduled_task) %></td>
+<%= render( :partial => 'task_row', :locals => {:scheduled_task => scheduled_task } )%>
+  <td><%= link_to( 'Destroy', { :action => 'destroy', :id => scheduled_task }, :confirm => 'Are you sure?', :method => :post) %></td>
+</tr>	
+<% end %>
+</table>
+<div><%= will_paginate( @scheduled_tasks ) %></div>
+
+<br />
+
+<%= link_to( 'New scheduled task', :action => 'new') %>
+
+
+<p>
+A system "cron job" triggers the Task Scheduler at a frequent interval (normally every 15 minutes). 
+The Task Scheduler triggers a run of any Task with a scheduled "Next Run" in the past. 
+When the Task has completed the run, the Task's "Interval Seconds" is added to 
+the "Next Run" time and the new Next Run value is saved back to the database.
+</p><p>
+If a Task State is set to Run for longer than it should be, it is probably stuck. The rake task task_scheduler:cleanup_task_runs 
+will probably clean it up within 24 hours or it can be run from the command line.
+</p>

@@ -1,0 +1,10 @@
+Description:
+    generate a migration
+
+Example:
+	./script/generate at_linksafe_task_scheduler
+	./script/generate at_linksafe_task_scheduler_2
+
+    This will create:
+        db/migrate/xxx_add_task_scheduler_tables.rb
+        db/migrate/xxx_rename_task_scheduler_tables.rb
