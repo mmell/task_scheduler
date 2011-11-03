@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = TaskScheduler::VERSION
   s.authors     = ["Mike Mell"]
   s.email       = ["mike.mell@nthwave.net"]
-  s.homepage    = "TODO"
+  s.homepage    = "https://github.com/mmell/task_scheduler"
   s.summary     = "Run local rake tasks triggered by cron, scheduled in the db."
   s.description = "See the README."
 
