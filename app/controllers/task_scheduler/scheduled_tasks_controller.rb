@@ -1,7 +1,7 @@
 module TaskScheduler
   class ScheduledTasksController < ApplicationController
 
-    layout 'admin.html.erb'
+    layout 'admin'
 
     before_filter :task_scheduler_access_control # must be implemented by the hosting app
 

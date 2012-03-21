@@ -15,8 +15,8 @@ namespace :task_scheduler do
 
   desc "reset stuck scheduled_tasks"
   task( :clear_stale, [] => [:environment]) { |t, args|
-    stale = ScheduledTask.find(:all,
-      :conditions => "state=#{ScheduledTask::States[:run]} and (started < DATE_SUB(NOW(), INTERVAL 6 HOUR) or started is null)"
+    stale = TaskScheduler::ScheduledTask.find(:all,
+      :conditions => "state=#{TaskScheduler::ScheduledTask::States[:run]} and (started < DATE_SUB(NOW(), INTERVAL 6 HOUR) or started is null)"
     )
     stale.each { |e|
       e.update_attributes(:state => 0, :started => nil)
@@ -27,13 +27,13 @@ namespace :task_scheduler do
   desc "cleanup_task_runs"
   task( :cleanup_task_runs, [] => [:environment]) { |t, args|
     DAYS = 14
-    result = ScheduledTaskRun.destroy_all( "created_at <= DATE_SUB( NOW(), INTERVAL #{DAYS} DAY)")
+    result = TaskScheduler::ScheduledTaskRun.destroy_all( "created_at <= DATE_SUB( NOW(), INTERVAL #{DAYS} DAY)")
     puts "destroyed #{result.size} scheduled_task_runs."
   }
 
   desc "task_scheduler optimize tables"
   task( :optimize_tables, [] => [:environment]) { |t, args|
-    tables = %W{ scheduled_task_runs scheduled_tasks }
+    tables = %W{ task_scheduler_scheduled_task_runs task_scheduler_scheduled_tasks }
     tables.each { |e|
       ActiveRecord::Migration.execute( "optimize table #{e};")
     }
@@ -42,10 +42,7 @@ namespace :task_scheduler do
 
   desc "run scheduled_tasks"
   task( :run, [] => [:environment]) { |t, args|
-    ScheduledTask.find(:all,
-      :conditions => "next_run <= NOW() and state = #{ScheduledTask::States[:sleep]}",
-      :order => :next_run
-    ).each { |e|
+    TaskScheduler::ScheduledTask.ready_to_run.each { |e|
       report = with_stdout_captured do
         begin
           puts "RUN TASK #{e.rake_method}( #{e.get_args.join(', ')} )"

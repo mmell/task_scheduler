@@ -8,6 +8,8 @@ module TaskScheduler
       :disabled => 2,
     }
 
+    scope :ready_to_run, where("next_run <= NOW() and state = #{TaskScheduler::ScheduledTask::States[:sleep]}").order(:next_run)
+
     def ran( report )
       if self.next_run < self.started
         self.next_run = self.started

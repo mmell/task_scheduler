@@ -10,9 +10,13 @@ class CreateTaskSchedulerScheduledTasks < ActiveRecord::Migration
       t.datetime :last_run
       t.integer :state
       t.datetime :started
-      t.datetime :created_on
-      t.datetime :updated_on
 
+      t.timestamps
+    end
+
+    create_table :task_scheduler_scheduled_task_runs do |t|
+      t.integer  "scheduled_task_id"
+      t.text     "report"
       t.timestamps
     end
   end

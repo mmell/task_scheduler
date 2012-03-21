@@ -1,3 +1,31 @@
 = TaskScheduler
 
-This project rocks and uses MIT-LICENSE.
+The controllers/task_scheduler/scheduled_tasks_controller expects there to be a layout named "admin".
+
+Include the TaskScheduler gem in your Gemfile:
+    gem 'task_scheduler'
+
+In your main application, add a route
+    mount TaskScheduler::Engine => "/"
+
+== Add the models to your database:
+    rake my_mountable_app:install:migrations
+    rake db:migrate
+
+== Add one or more ScheduledTasks by visiting /scheduled_tasks.
+
+# Create a shell script to trigger any waiting ScheduledTasks
+# /home/rails/cron_jobs/task_scheduler_cron.sh
+    #!/bin/bash
+    source /home/rails/.bash_profile # need to  load rvm setup
+
+    cd /home/apps/main_app
+    /home/rails/.rvm/gems/ruby-1.9.2-p180@rails2/bin/rake RAILS_ENV=production task_scheduler:run
+
+It's always a good idea to use full paths in scripts for cron.
+
+== Add a line to your crontab
+    1 * * * * /home/rails/cron_jobs/task_scheduler_cron.sh
+
+
+This project uses MIT-LICENSE.

@@ -16,7 +16,7 @@
 <tr class='row<%= cycle(1,2) %>'>
   <td><%= link_to( 'Task Runs', :action => 'show', :id => scheduled_task) %></td>
   <td><%= link_to( 'Edit', :action => 'edit', :id => scheduled_task) %></td>
-<%= render( :partial => 'task_row', :locals => {:scheduled_task => scheduled_task } )%>
+  <%= render( :partial => 'task_row', :locals => {:scheduled_task => scheduled_task } )%>
   <td><%= link_to( 'Destroy', { :action => 'destroy', :id => scheduled_task }, :confirm => 'Are you sure?', :method => :post) %></td>
 </tr>
 <% end %>
@@ -25,7 +25,7 @@
 
 <br />
 
-<%= link_to( 'New scheduled task', :action => 'new') %>
+<%= link_to( 'New scheduled task', :new_scheduled_task) %>
 
 
 <p>

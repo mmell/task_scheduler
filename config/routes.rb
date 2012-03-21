@@ -4,6 +4,7 @@ TaskScheduler::Engine.routes.draw do
 
   resources :scheduled_tasks
 
+  # move a legacy route
   match "/task_scheduler" => redirect("/scheduled_tasks")
 
 end

@@ -51,10 +51,10 @@
   <div class="field">
     <%= f.label :state %><br />
     <select id="scheduled_task_state" name="scheduled_task[state]">
-	<option value="1"<%= state_active?(1) %>disabled='disabled'>run</option>
-	<option value="0"<%= state_active?(0) %>>sleep</option>
-	<option value="2"<%= state_active?(2) %>>disabled</option>
-</select>
+      <option value="1"<%= select_state?(1) %>disabled='disabled'>running</option>
+      <option value="0"<%= select_state?(0) %>>sleeping</option>
+      <option value="2"<%= select_state?(2) %>>disabled</option>
+    </select>
   </div>
 
   <div class="actions">
