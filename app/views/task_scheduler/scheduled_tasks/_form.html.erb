@@ -1,0 +1,63 @@
+<%= form_for(@scheduled_task) do |f| %>
+  <% if @scheduled_task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@scheduled_task.errors.count, "error") %> prohibited this scheduled_task from being saved:</h2>
+
+      <ul>
+      <% @scheduled_task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rake_method %><br />
+    <%= f.text_field :rake_method %>
+  </div>
+  <div class="field">
+    <%= f.label :args %><br />
+    <%= f.text_field :args %>
+  </div>
+  <div class="field">
+    <%= f.label :args_sep %><br />
+    <%= f.text_field :args_sep %>
+  </div>
+  <div class="field">
+    <%= f.label :notify_email %><br />
+    <%= f.text_field :notify_email %>
+  </div>
+  <div class="field">
+    <%= f.label :interval_seconds %><br />
+    <%= f.number_field :interval_seconds %>
+  </div>
+  <div class="field">
+    <%= f.label :next_run %><br />
+    <%= f.datetime_select :next_run %>
+  </div>
+  <div class="field">
+    <%= f.label :last_run %><br />
+    <%= f.datetime_select :last_run %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.number_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label :started %><br />
+    <%= f.datetime_select :started %>
+  </div>
+
+  <div class="field">
+    <%= f.label :state %><br />
+    <select id="scheduled_task_state" name="scheduled_task[state]">
+	<option value="1"<%= state_active?(1) %>disabled='disabled'>run</option>
+	<option value="0"<%= state_active?(0) %>>sleep</option>
+	<option value="2"<%= state_active?(2) %>>disabled</option>
+</select>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

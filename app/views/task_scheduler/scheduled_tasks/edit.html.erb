@@ -1,0 +1,8 @@
+<h1>Editing scheduled_task</h1>
+
+<h3>Current Time: <%= Time.now.strftime("%Y/%m/%d %H:%M:%S") %></h3>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @scheduled_task %> |
+<%= link_to 'Back', scheduled_tasks_path %>

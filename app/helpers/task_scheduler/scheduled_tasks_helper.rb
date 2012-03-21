@@ -1,4 +1,4 @@
 module TaskScheduler
-  module ApplicationHelper
+  module ScheduledTasksHelper
   end
 end
