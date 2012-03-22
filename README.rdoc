@@ -25,17 +25,18 @@ then the url will be http://0.0.0.0:3000/ts/scheduled_tasks
 Visit the url where you have TaskScheduler::Engine mounted and create a Scheduled Task.
 
 # Create a shell script to trigger any waiting ScheduledTasks
-# /home/rails/cron_jobs/task_scheduler_cron.sh
+    # /home/rails/cron_jobs/task_scheduler_cron.sh
+
     #!/bin/bash
     source /home/rails/.bash_profile # need to load rvm setup
 
     cd /home/apps/main_app/production
-    /home/rails/.rvm/gems/ruby-1.9.2-p180@rails2/bin/rake RAILS_ENV=production task_scheduler:run
+    /usr/bin/env rake RAILS_ENV=production task_scheduler:run
 
-_It's always a good idea to use full paths in scripts for cron._
+_ Tip: It's always a good idea to use full paths in scripts for cron._
 
 === Add a line to your crontab
-    1 * * * * /home/rails/cron_jobs/task_scheduler_cron.sh
+    1 * * * * /home/rails/cron_jobs/task_scheduler_cron.sh # run every hour
 
 The controllers/task_scheduler/scheduled_tasks_controller expects there to be a layout named "admin".
 
