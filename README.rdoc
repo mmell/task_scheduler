@@ -1,31 +1,42 @@
 = TaskScheduler
 
-The controllers/task_scheduler/scheduled_tasks_controller expects there to be a layout named "admin".
+TaskScheduler provides a means to run rake tasks on a schedule triggered by a simple cron.
+You build your rake tasks in the usual way and create a schedule for TaskScheduler to trigger them.
 
-Include the TaskScheduler gem in your Gemfile:
+== Installation
+=== Set up the Gemfile
+Include the TaskScheduler gem in your Rails application Gemfile:
     gem 'task_scheduler'
 
-In your main application, add a route
-    mount TaskScheduler::Engine => "/"
-
-== Add the models to your database:
+=== Add the tables to your database:
     rake my_mountable_app:install:migrations
     rake db:migrate
 
-== Add one or more ScheduledTasks by visiting /scheduled_tasks.
+=== Add the route
+In your Rails application, add a route
+    mount TaskScheduler::Engine => "/"
+The url will be http://0.0.0.0:3000/scheduled_tasks
+
+If your route is
+    mount TaskScheduler::Engine => "/ts"
+then the url will be http://0.0.0.0:3000/ts/scheduled_tasks
+
+=== Add one or more ScheduledTasks
+Visit the url where you have TaskScheduler::Engine mounted and create a Scheduled Task.
 
 # Create a shell script to trigger any waiting ScheduledTasks
 # /home/rails/cron_jobs/task_scheduler_cron.sh
     #!/bin/bash
-    source /home/rails/.bash_profile # need to  load rvm setup
+    source /home/rails/.bash_profile # need to load rvm setup
 
-    cd /home/apps/main_app
+    cd /home/apps/main_app/production
     /home/rails/.rvm/gems/ruby-1.9.2-p180@rails2/bin/rake RAILS_ENV=production task_scheduler:run
 
-It's always a good idea to use full paths in scripts for cron.
+__It's always a good idea to use full paths in scripts for cron.__
 
-== Add a line to your crontab
+=== Add a line to your crontab
     1 * * * * /home/rails/cron_jobs/task_scheduler_cron.sh
 
+The controllers/task_scheduler/scheduled_tasks_controller expects there to be a layout named "admin".
 
-This project uses MIT-LICENSE.
+This project uses the MIT-LICENSE.

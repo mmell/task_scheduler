@@ -1,6 +1,6 @@
 module TaskScheduler
   class ScheduledTask < ActiveRecord::Base
-    has_many :scheduled_task_runs, :dependent => :destroy, :order => :created_at, :order => 'created_at desc'
+    has_many :scheduled_task_runs, :dependent => :destroy, :order => 'created_at desc'
 
     States = {
       :sleep => 0,
@@ -27,7 +27,7 @@ module TaskScheduler
       self.update_attributes( :state => States[:run], :started => Time.now )
     end
 
-    def get_args
+    def args_array
       self.args ? self.args.split(self.args_sep) : []
     end
 

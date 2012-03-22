@@ -45,7 +45,7 @@ namespace :task_scheduler do
     TaskScheduler::ScheduledTask.ready_to_run.each { |e|
       report = with_stdout_captured do
         begin
-          puts "RUN TASK #{e.rake_method}( #{e.get_args.join(', ')} )"
+          puts "RUN TASK #{e.rake_method}( #{e.args_array.join(', ')} )"
           e.running
           Rake::Task[e.rake_method].invoke
         rescue StandardError => err
@@ -53,7 +53,7 @@ namespace :task_scheduler do
 #{File.expand_path(__FILE__)}
 AT: #{Time.now}
 
-RAN: #{e.rake_method}( #{e.get_args.join(', ')} )
+RAN: #{e.rake_method}( #{e.args_array.join(', ')} )
 
 CRASHED:
 #{err}
