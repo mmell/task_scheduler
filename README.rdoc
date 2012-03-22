@@ -32,7 +32,7 @@ Visit the url where you have TaskScheduler::Engine mounted and create a Schedule
     cd /home/apps/main_app/production
     /home/rails/.rvm/gems/ruby-1.9.2-p180@rails2/bin/rake RAILS_ENV=production task_scheduler:run
 
-__It's always a good idea to use full paths in scripts for cron.__
+_It's always a good idea to use full paths in scripts for cron._
 
 === Add a line to your crontab
     1 * * * * /home/rails/cron_jobs/task_scheduler_cron.sh
