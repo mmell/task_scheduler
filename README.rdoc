@@ -1,6 +1,6 @@
 = TaskScheduler
 
-TaskScheduler provides a means to run rake tasks on a schedule triggered by a simple cron.
+TaskScheduler provides a means to run rake tasks on a schedule triggered by a simple crontab entry.
 You build your rake tasks in the usual way and create a schedule for TaskScheduler to trigger them.
 
 == Installation
