@@ -1,5 +1,5 @@
-<td><strong><%= scheduled_task.rake_method.titleize %></strong><br />(<%= scheduled_task.args %>)</td>
-<td><%= scheduled_task.next_run.strftime("%Y/%m/%d %H:%M:%S") %></td>
-<td><%= scheduled_task.last_run.strftime("%Y/%m/%d %H:%M:%S") %></td>
+<td><strong><%= scheduled_task.rake_method %>(<%= scheduled_task.args %>)</strong></td>
+<td><%= format_datetime(scheduled_task.next_run) %></td>
+<td><%= format_datetime(scheduled_task.last_run) %></td>
 <td><%= TaskScheduler::ScheduledTask::States.select { |k,v| v == scheduled_task.state.to_i }.keys[0] %>
-	<% if TaskScheduler::ScheduledTask::States[:run] == scheduled_task.state %><br />(<%= scheduled_task.started.strftime("%Y/%m/%d %H:%M") %>)<% end %></td>
+	<% if TaskScheduler::ScheduledTask::States[:run] == scheduled_task.state %><br />(<%= format_datetime(scheduled_task.started) %>)<% end %></td>

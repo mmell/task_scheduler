@@ -50,6 +50,9 @@ module TaskScheduler
     # POST /scheduled_tasks.json
     def create
       @scheduled_task = ScheduledTask.new(params[:scheduled_task])
+      p = params[:scheduled_task]
+      d = DateTime.new(p["next_run(1i)"].to_i, p["next_run(2i)"].to_i, p["next_run(3i)"].to_i, p["next_run(4i)"].to_i, p["next_run(5i)"].to_i)
+      @scheduled_task.next_run = d
 
       respond_to do |format|
         if @scheduled_task.save

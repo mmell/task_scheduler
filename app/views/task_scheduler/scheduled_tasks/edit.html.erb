@@ -1,6 +1,6 @@
 <h1>Editing scheduled_task</h1>
 
-<h3>Current Time: <%= Time.now.strftime("%Y/%m/%d %H:%M:%S") %></h3>
+<h3>Current Time: <%= format_datetime(Time.now) %></h3>
 
 <%= render 'form' %>
 

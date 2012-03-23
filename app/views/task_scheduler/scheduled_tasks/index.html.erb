@@ -1,6 +1,6 @@
 <% @page_title = 'Listing Tasks' %>
 
-<h3>Current Time: <%= Time.now.strftime("%Y/%m/%d %H:%M:%S") %></h3>
+<h3>Current Time: <%= format_datetime(Time.now) %></h3>
 
 <table cellpadding='2'>
 <tr>
