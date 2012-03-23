@@ -24,7 +24,7 @@ then the url will be http://0.0.0.0:3000/ts/scheduled_tasks
 === Add one or more ScheduledTasks
 Visit the url where you have TaskScheduler::Engine mounted and create a Scheduled Task.
 
-# Create a shell script to trigger any waiting ScheduledTasks
+Create a shell script to trigger any waiting ScheduledTasks.
     # /home/rails/cron_jobs/task_scheduler_cron.sh
 
     #!/bin/bash
@@ -33,7 +33,7 @@ Visit the url where you have TaskScheduler::Engine mounted and create a Schedule
     cd /home/apps/main_app/production
     /usr/bin/env rake RAILS_ENV=production task_scheduler:run
 
-_ Tip: It's always a good idea to use full paths in scripts for cron._
+_Tip: It's always a good idea to use full paths in scripts for cron._
 
 === Add a line to your crontab
     1 * * * * /home/rails/cron_jobs/task_scheduler_cron.sh # run every hour
