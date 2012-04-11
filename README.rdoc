@@ -6,20 +6,21 @@ You build your rake tasks in the usual way and create a schedule for TaskSchedul
 == Installation
 === Set up the Gemfile
 Include the TaskScheduler gem in your Rails application Gemfile:
-    gem 'task_scheduler'
+    gem 'task_scheduler', :git => 'git://github.com/mmell/task_scheduler.git'
 
 === Add the tables to your database:
-    rake my_mountable_app:install:migrations
+    rake task_scheduler:install:migrations
     rake db:migrate
 
 === Add the route
 In your Rails application, add a route
-    mount TaskScheduler::Engine => "/"
-The url will be http://0.0.0.0:3000/scheduled_tasks
+    mount TaskScheduler::Engine => "/tasks"
+then the url will be http://0.0.0.0:3000/tasks/scheduled_tasks
 
-If your route is
-    mount TaskScheduler::Engine => "/ts"
-then the url will be http://0.0.0.0:3000/ts/scheduled_tasks
+
+=== Set a default host for urls in email messages in config/application.rb
+
+    config.action_mailer.default_url_options = { :host => "example.com" }
 
 === Add one or more ScheduledTasks
 Visit the url where you have TaskScheduler::Engine mounted and create a Scheduled Task.
@@ -40,4 +41,7 @@ _Tip: It's always a good idea to use full paths in scripts for cron._
 
 The controllers/task_scheduler/scheduled_tasks_controller expects there to be a layout named "admin".
 
-This project uses the MIT-LICENSE.
+This project was originally available in the vendor/plugins of the Linksafe Ibroker
+on [Soureforge](http://linksafe.svn.sourceforge.net/viewvc/linksafe/rails/ibroker/trunk/vendor/plugins/at_linksafe_task_scheduler)
+
+This project is released under the MIT-LICENSE.
