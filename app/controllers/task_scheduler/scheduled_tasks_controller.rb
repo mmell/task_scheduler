@@ -71,7 +71,7 @@ module TaskScheduler
       @scheduled_task = ScheduledTask.find(params[:id])
 
       respond_to do |format|
-        if @scheduled_task.update_attributes(params[:scheduled_task])
+        if @scheduled_task.update_attributes(params.require(:scheduled_task).permit!)
           format.html { redirect_to @scheduled_task, notice: 'Scheduled task was successfully updated.' }
           format.json { head :no_content }
         else
